@@ -1,4 +1,4 @@
-angular.module('alurapic').controller('FotosController', function($scope, $http,recursoFoto) {
+angular.module('alurapic').controller('FotosController', function($scope, recursoFoto) {
 	
 	$scope.fotos = [];
 	$scope.filtro = '';

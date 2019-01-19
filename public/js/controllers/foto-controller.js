@@ -16,7 +16,6 @@ angular.module('alurapic')
 		}
 
 
-
 		$scope.submeter = function() {
 
 			if ($scope.formulario.$valid) {
