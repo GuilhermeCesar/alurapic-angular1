@@ -5,4 +5,43 @@ angular.module('meusServicos',['ngResource'])
 			method:'PUT'
 		}
 	});
+})
+.factory('cadastroDeFotos', function (recursoFoto,$q) {
+	var service = {};
+
+	service.cadastrar = function (foto) {
+		return $q(function (resolve, reject) {
+			if(foto._id){
+				recursoFoto.update({fotoId:foto._id},foto,
+					function () {
+						resolve({
+							mensagem:'Foto '+foto.titulo+' atualizado com sucesso',
+							inclusao: false
+						});
+					},
+					function (erro) {
+						console.log(erro);
+						reject(
+							{mensagem:'Não foi possivel incluir a foto'}
+							)
+					}
+				)
+			}else {
+				recursoFoto.save(foto,
+					()=>resolve({
+						mensagem:'Foto '+foto.titulo+' incluido com sucesso!',
+						inclusao: true
+					},
+					(erro) => {
+						console.log(erro);
+						reject({
+							mensagem:'Não foi possivel incluir a foto '+foto.titulo,
+						});
+					} )
+				)
+			}
+		})
+	};
+
+	return service;
 });
